@@ -1,0 +1,447 @@
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Inicio | OnyxBot</title> 
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet"/>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #0d0d0d;
+            color: #ffffff;
+        }
+        .gradient-text {
+            background: linear-gradient(90deg, #ff00ff, #00ffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .gradient-border {
+            border: 2px solid;
+            border-image-slice: 1;
+            border-width: 2px;
+            border-image-source: linear-gradient(90deg, #ff00ff, #00ffff);
+        }
+        .hover-move {
+            transition: transform 0.3s ease;
+        }
+        .hover-move:hover {
+            transform: translateY(-10px);
+        }
+        .hover-effect {
+            transition: all 0.3s ease;
+        }
+        .hover-effect:hover {
+            transform: scale(1.05) rotate(3deg);
+            background-color: #ff00ff;
+            color: #ffffff;
+        }
+        .shadow-effect {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .shadow-effect:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+        }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-20px);
+            }
+            60% {
+                transform: translateY(-10px);
+            }
+        }
+        .bounce {
+            animation: bounce 2s infinite;
+        }
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+        @keyframes blink-caret {
+            from, to { border-color: transparent; }
+            50% { border-color: white; }
+        }
+        .typing-text {
+            overflow: hidden;
+            border-right: .15em solid white;
+            white-space: nowrap;
+            margin: 0 auto;
+            letter-spacing: .15em;
+            animation: typing 3.5s steps(30, end), blink-caret .75s step-end infinite;
+        }
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            padding: 2rem;
+        }
+        .card {
+            background-color: #1a1a1a;
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+        }
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+        .card-content {
+            font-size: 1rem;
+            color: #b3b3b3;
+            margin-bottom: 1.5rem;
+        }
+        .card-button {
+            background-color: #ff00ff;
+            color: #ffffff;
+            padding: 0.75rem 1.5rem;
+            border-radius: 4px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+        .card-button:hover {
+            background-color: #e600e6;
+        }
+        @media (max-width: 768px) {
+            .flex-col {
+                flex-direction: column;
+            }
+            .text-center {
+                text-align: center;
+            }
+            .mt-8 {
+                margin-top: 2rem;
+            }
+            .md\:ml-8 {
+                margin-left: 0;
+            }
+        }
+        @media (max-width: 480px) {
+            .text-4xl {
+                font-size: 2rem;
+            }
+            .text-2xl {
+                font-size: 1.5rem;
+            }
+            .text-xl {
+                font-size: 1.25rem;
+            }
+            .px-6 {
+                padding-left: 1.5rem;
+                padding-right: 1.5rem;
+            }
+            .py-3 {
+                padding-top: 0.75rem;
+                padding-bottom: 0.75rem;
+            }
+        }
+        .slot-machine {
+            position: relative;
+            width: 100%;
+            max-width: 400px;
+            height: 200px;
+            background: linear-gradient(145deg, #6a00ff, #ff00ff);
+            border-radius: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            margin: 0 auto;
+        }
+        .slot {
+            width: 80px;
+            height: 100%;
+            background: #1a1a1a;
+            border-radius: 20px;
+            margin: 0 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            font-size: 60px;
+            font-weight: bold;
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+        .lever {
+            position: absolute;
+            right: -50px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 20px;
+            height: 100px;
+            background: #1a1a1a;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+        .lever-ball {
+            width: 30px;
+            height: 30px;
+            background: linear-gradient(145deg, #ff00ff, #6a00ff);
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: #ff0;
+            animation: fall 2s linear infinite;
+        }
+        @keyframes fall {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(100vh); }
+        }
+        @keyframes spin {
+            0% { transform: translateY(0); }
+            25% { transform: translateY(-100%); }
+            50% { transform: translateY(-200%); }
+            75% { transform: translateY(-300%); }
+            100% { transform: translateY(0); }
+        }
+        @keyframes smoke {
+            0% { opacity: 0; transform: translateY(0); }
+            50% { opacity: 0.5; transform: translateY(-50px); }
+            100% { opacity: 0; transform: translateY(-100px); }
+        }
+        .smoke {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 251, 0, 0.5);
+            border-radius: 50%;
+            animation: smoke 1s ease-out forwards;
+        }
+        .spin-button {
+            background-color: #ff00ff;
+            color: #ffffff;
+            padding: 0.75rem 1.5rem;
+            border-radius: 4px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+            margin-top: 20px;
+            cursor: pointer;
+            animation: bounce 2s infinite;
+        }
+        .spin-button:hover {
+            background-color: #e600e6;
+        }
+        @keyframes fall-leaf {
+            0% { transform: translateY(0) rotate(0deg); }
+            100% { transform: translateY(100vh) rotate(360deg); }
+        }
+        .falling-leaf {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 30px;
+            height: 30px;
+            background-color: #800080;
+            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+            animation: fall-leaf 3s linear infinite;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
+    <script>
+        const fruits = ['🍒', '🍋', '🍉', '🍇', '🍓', '🍍'];
+
+        function getRandomFruit() {
+            return fruits[Math.floor(Math.random() * fruits.length)];
+        }
+
+        function spinSlots() {
+            const slot1 = document.getElementById('slot1');
+            const slot2 = document.getElementById('slot2');
+            const slot3 = document.getElementById('slot3');
+
+            slot1.style.animation = 'spin 0.2s linear infinite';
+            slot2.style.animation = 'spin 0.2s linear infinite';
+            slot3.style.animation = 'spin 0.2s linear infinite';
+
+            setTimeout(() => {
+                slot1.style.animation = 'none';
+                slot2.style.animation = 'none';
+                slot3.style.animation = 'none';
+
+                slot1.textContent = getRandomFruit();
+                slot2.textContent = getRandomFruit();
+                slot3.textContent = getRandomFruit();
+
+                if (slot1.textContent === slot2.textContent && slot2.textContent === slot3.textContent) {
+                    launchConfetti();
+                    setTimeout(() => {
+                        showAlertBox();
+                    }, 3000);
+                }
+            }, 2000);
+
+            showSmoke();
+        }
+
+        function showSmoke() {
+            const slotMachine = document.querySelector('.slot-machine');
+            for (let i = 0; i < 10; i++) {
+                const smoke = document.createElement('div');
+                smoke.classList.add('smoke');
+                smoke.style.left = Math.random() * 100 + '%';
+                slotMachine.appendChild(smoke);
+
+                setTimeout(() => {
+                    smoke.remove();
+                }, 1000);
+            }
+        }
+
+        function launchConfetti() {
+            var duration = 3 * 1000;
+            var end = Date.now() + duration;
+
+            (function frame() {
+                confetti({
+                    particleCount: 2,
+                    angle: 60,
+                    spread: 55,
+                    origin: { x: 0 }
+                });
+                confetti({
+                    particleCount: 2,
+                    angle: 120,
+                    spread: 55,
+                    origin: { x: 1 }
+                });
+
+                if (Date.now() < end) {
+                    requestAnimationFrame(frame);
+                }
+            }());
+        }
+
+        function startBounce() {
+            const whatsappButton = document.getElementById('whatsapp-button');
+            setInterval(() => {
+                whatsappButton.classList.add('bounce');
+                setTimeout(() => {
+                    whatsappButton.classList.remove('bounce');
+                }, 2000);
+            }, 10000);
+        }
+
+        function showAlertBox() {
+    const alertBox = document.createElement('div');
+    alertBox.classList.add('fixed', 'inset-0', 'flex', 'items-center', 'justify-center', 'bg-gray-300', 'bg-opacity-75');
+    alertBox.innerHTML = `
+        <div class="bg-white rounded-lg shadow-lg w-80">
+            <div class="relative">
+                <div class="bg-purple-500 rounded-t-lg p-6 flex flex-col items-center">
+                    <i class="fas fa-check-circle text-pink text-6xl"></i>
+                </div>
+                <button class="absolute top-2 right-2 text-black-500 hover:text-pink-700" onclick="this.parentElement.parentElement.remove()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="p-6 text-center">
+                <h2 class="text-xl font-bold mb-2">Parabéns!</h2>
+                <p class="text-pink-600 mb-4" style="background: linear-gradient(to right, #FF6B6B, #FFD93D); -webkit-background-clip: text; color: transparent;">
+                    Globoplay + Canais ao Vivo
+                </p>
+                <button class="bg-purple-500 text-white py-2 px-4 rounded-full hover:bg-purple-600" 
+                        onclick="window.location.href='https://wa.me/5511911754750'; this.parentElement.parentElement.parentElement.remove()">
+                    Receber Prêmio
+                </button>
+            </div>
+        </div>
+    `;
+    document.body.appendChild(alertBox);
+        }
+
+        window.onload = function() {
+            startBounce();
+        }
+    </script>
+</head>
+<body class="flex flex-col items-center justify-center min-h-screen">
+    <header class="w-full flex justify-between items-center p-4 bg-gray-900 shadow-effect">
+        <div class="flex items-center text-2xl font-bold text-purple-500">
+            <img alt="Logo do OnyxBot" class="mr-2" height="32" src="img/logobot.png" width="32"/>
+            OnyxBot
+        </div>
+        <nav class="flex space-x-4">
+            <a class="text-white hover-effect shadow-effect" href="https://assinarplano.netlify.app/">Comprar</a>
+            <a class="text-white hover-effect shadow-effect" href="https://chat.whatsapp.com/GIIqDr8RSUk28HNlsZl8Hx">Comunidade</a>
+            <a class="text-white hover-effect shadow-effect" href="#fimdapagina">Jogos</a>
+            <a class="text-white hover-effect shadow-effect" href="https://chat.whatsapp.com/GIIqDr8RSUk28HNlsZl8Hx">API</a>
+        </nav>
+        <div class="flex space-x-4">
+            <button class="px-4 py-2 bg-gray-800 text-white rounded hover-effect shadow-effect" onclick="window.location.href='https://wa.me/5592999652961'">Ajuda</button>
+            <button class="px-4 py-2 bg-pink-500 text-white rounded hover-effect shadow-effect" onclick="window.location.href='https://encurtador.com.br/jLzcY'">Download</button>
+        </div>
+    </header>
+    <main class="flex flex-col md:flex-row items-center justify-center p-8">
+        <div class="flex-1 flex justify-center relative">
+            <img alt="A stylized character with white and purple hair, wearing a purple shirt with a graphic design" class="rounded-lg shadow-lg hover-effect shadow-effect" height="400" src="img/botbanner.png" width="400"/>
+            <div class="falling-leaf"></div>
+        </div>
+        <div class="flex-1 text-center md:text-left mt-8 md:mt-0 md:ml-8">
+            <h2 class="text-lg text-gray-400 mb-2 typing-text">Seja Bem vindo(a) ao Site!</h2>
+            <h1 class="text-4xl font-bold mb-4">
+                Você decola seu
+                <span class="gradient-text">Entretenimento</span>
+                conosco.
+            </h1>
+            <p class="text-gray-400 mb-6">
+                Participe deste evento premiado, ao clicar em Cadastrar, faça download do app, em seguida cadastre-se e ganhe acesso a logins de streamings aleatoriamente.
+            </p>
+            <div class="flex space-x-4">
+                <button class="px-6 py-3 bg-pink-500 text-white rounded hover-effect shadow-effect" onclick="launchConfetti(); window.location.href='https://encurtador.com.br/jLzcY'">Fazer Cadastro</button>
+                <button class="px-6 py-3 bg-gray-800 text-white rounded hover-effect shadow-effect" onclick="window.location.href='https://wa.me/5511911754750'">Fiz o Cadastro</button>
+            </div>
+        </div>
+    </main>
+    <section class="w-full p-8">
+        <h2 class="text-3xl font-bold text-center mb-8 gradient-text">Serviços | Exclusivo</h2>
+        <div class="card-grid">
+            <div class="card shadow-effect">
+                <h3 class="card-title gradient-text">Plus - 30 dias</h3>
+                <p class="card-content">R$ 17,90</p>
+                <p class="card-content">Acesso a 1 mês de streaming básico com conteúdo limitado.</p>
+                <a class="card-button" href="https://assinarplano.netlify.app/">Comprar</a>
+            </div>
+            <div class="card shadow-effect">
+                <h3 class="card-title gradient-text">Master 30 dias</h3>
+                <p class="card-content">R$ 32,90</p>
+                <p class="card-content">Acesso a 1 mês de streaming premium com conteúdo ilimitado.</p>
+                <a class="card-button" href="https://assinarplano.netlify.app/">Comprar</a>
+            </div>
+        </div>
+    </section>
+    <section class="w-full p-8 flex flex-col items-center">
+        <h2 class="text-3xl font-bold text-center mb-8 gradient-text">GIRO PREMIADO</h2>
+        <h2 class="text-lg text-white-400 mb-6 typing-text">Ganhe Recompensas incríveis Girando</h2>
+        <div class="slot-machine">
+            <div class="slot" id="slot1">🍒</div>
+            <div class="slot" id="slot2">🍒</div>
+            <div class="slot" id="slot3">🍒</div>
+            <div class="lever" onclick="spinSlots()">
+                <div class="lever-ball"></div>
+            </div>
+        </div>
+        <button class="spin-button" onclick="spinSlots()">Girar</button>
+    </section>
+    <footer class="fixed bottom-4 right-4">
+        <a class="text-green-500 text-4xl hover-effect shadow-effect" href="https://wa.me/5511911754750" id="whatsapp-button">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+    </footer>
+</body>
+</html>
